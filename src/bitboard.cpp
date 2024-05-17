@@ -139,7 +139,7 @@ Bitboard sliding_attack(PieceType pt, Square sq, Bitboard occupied) {
 // www.chessprogramming.org/Magic_Bitboards. In particular, here we use the so
 // called "fancy" approach.
 void init_magics(PieceType pt, Bitboard table[], Magic magics[]) {
-    std::cout << "Initializing " << (pt == ROOK ? "rook" : "bishop") << " magics..." // Inserted
+    std::cout << "Initializing " << (pt == ROOK ? "rook" : "bishop") << " magics..."; // Inserted
     
     // Optimal PRNG seeds to pick the correct magics in the shortest time
     int seeds[][RANK_NB] = {{8977, 44560, 54343, 38998, 5731, 95205, 104912, 17020},
