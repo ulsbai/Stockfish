@@ -1,4 +1,4 @@
-# Stockfish_savemagics
+# Modified Stockfish
 
 In this repository, I am working on modifying Stockfish in various ways, mainly to save the magics computed at launch in a file, so that they can be reused or accessed by other programs.
 
