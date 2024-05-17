@@ -22,6 +22,8 @@
 #include <bitset>
 #include <initializer_list>
 
+#include <iostream> // Inserted
+
 #include "misc.h"
 
 namespace Stockfish {
@@ -137,7 +139,8 @@ Bitboard sliding_attack(PieceType pt, Square sq, Bitboard occupied) {
 // www.chessprogramming.org/Magic_Bitboards. In particular, here we use the so
 // called "fancy" approach.
 void init_magics(PieceType pt, Bitboard table[], Magic magics[]) {
-
+    std::cout << "Initializing " << (pt == ROOK ? "rook" : "bishop") << " magics..." // Inserted
+    
     // Optimal PRNG seeds to pick the correct magics in the shortest time
     int seeds[][RANK_NB] = {{8977, 44560, 54343, 38998, 5731, 95205, 104912, 17020},
                             {728, 10316, 55013, 32803, 12281, 15100, 16645, 255}};
@@ -210,7 +213,10 @@ void init_magics(PieceType pt, Bitboard table[], Magic magics[]) {
             }
         }
     }
+
+    std::cout << " done\n"; // Inserted
 }
+
 }
 
 }  // namespace Stockfish
