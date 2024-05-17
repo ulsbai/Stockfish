@@ -4,4 +4,4 @@ In this repository, I am working on modifying Stockfish in various ways, mainly 
 
 ## Stockfish README
 
-See the README file of the original Stockfish: (Stockfish_README.md)[Stockfish_README.md]
+See the README file of the original Stockfish: [Stockfish_README.md](Stockfish_README.md)
