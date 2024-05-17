@@ -159,6 +159,10 @@ class Logger {
 // Stockfish version
 std::string engine_info(bool to_uci) {
     std::stringstream ss;
+    
+    ss << "A modified version of Stockfish\n";
+    ss << "The original Stockfish prints on startup:\n";
+    
     ss << "Stockfish " << version << std::setfill('0');
 
     if constexpr (version == "dev")
