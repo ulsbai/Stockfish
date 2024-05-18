@@ -22,7 +22,9 @@
 #include <bitset>
 #include <initializer_list>
 
-#include <iostream> // Inserted
+// Inserted
+#include <fstream>
+#include <iostream>
 
 #include "misc.h"
 
@@ -51,6 +53,29 @@ void init_magics(PieceType pt, Bitboard table[], Magic magics[]);
 Bitboard safe_destination(Square s, int step) {
     Square to = Square(s + step);
     return is_ok(to) && distance(s, to) <= 2 ? square_bb(to) : Bitboard(0);
+}
+
+// Inserted
+// Serializes magics into a file output stream
+void serialize_magics(Magic magics[], std::ofstream out) {
+  uint32_t magics_len = sizeof(magics) / sizeof(magics[0]);
+  out.write(reinterpret_cast<char*>(&magics_len), sizeof(magics_len));
+  
+  for (Magic& m : magics) {
+    out.write(reinterpret_cast<char*>(&m.mask), sizeof(m.mask));
+    out.write(reinterpret_cast<char*>(&m.magic), sizeof(m.magic));
+
+    uint32_t attacks_len = sizeof(m.attacks) / sizeof(m.attacks[0]);
+    out.write(reinterpret_cast<char*>(&attacks_len), sizeof(attacks_len));
+    
+    for (Bitboard attack : m.attacks) {
+      out.write(reinterpret_cast<char*>(&attack), sizeof(attack));
+    }
+
+    uint32_t shift_size = sizeof(m.shift)
+    out.write(reinterpret_cast<char*>(&shift_size), sizeof(shift_size));
+    out.write(reinterpret_cast<char*>(&m.shift), sizeof(m.shift));
+  }
 }
 }
 
@@ -87,6 +112,11 @@ void Bitboards::init() {
     init_magics(ROOK, RookTable, RookMagics);
     init_magics(BISHOP, BishopTable, BishopMagics);
 
+    // Inserted
+    std::ofstream magicsFile("magics", std::ios::binary);
+    serialize_magics(RookMagics, magicsFile);
+    serialize_magics(BishopMagics, magicsFile);
+    
     for (Square s1 = SQ_A1; s1 <= SQ_H8; ++s1)
     {
         PawnAttacks[WHITE][s1] = pawn_attacks_bb<WHITE>(square_bb(s1));
