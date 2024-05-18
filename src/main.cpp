@@ -38,6 +38,8 @@ int main(int argc, char* argv[]) {
 
     Tune::init(uci.engine_options());
 
+    std::cout << "Ready\n";
+
     uci.loop();
 
     return 0;
