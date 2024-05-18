@@ -28,6 +28,8 @@
 #include <utility>
 #include <vector>
 
+#include <iostream> # Inserted
+
 #include "benchmark.h"
 #include "engine.h"
 #include "evaluate.h"
@@ -103,7 +105,7 @@ void UCIEngine::loop() {
 
     do
     {
-        sync_cout << ">>> "; // Inserted
+        std::cout << ">>> "; // Inserted
         
         if (cli.argc == 1
             && !getline(std::cin, cmd))  // Wait for an input or an end-of-file (EOF) indication
