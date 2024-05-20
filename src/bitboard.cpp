@@ -113,7 +113,7 @@ void Bitboards::init() {
     init_magics(BISHOP, BishopTable, BishopMagics);
 
     // Inserted
-    std::ofstream magicsFile("magics", std::ios::binary);
+    std::ofstream magicsFile = new std::ofstream("magics", std::ios::binary);
     serialize_magics(RookMagics, magicsFile);
     serialize_magics(BishopMagics, magicsFile);
     
