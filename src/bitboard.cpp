@@ -57,14 +57,13 @@ Bitboard safe_destination(Square s, int step) {
 
 // Inserted
 // Serializes magics into a file output stream
-void serialize_magics(Magic magics[], std::ofstream out) {
-  uint32_t magics_len = sizeof(magics) / sizeof(magics[0]);
-  out.write(reinterpret_cast<char*>(&magics_len), sizeof(magics_len));
-  
-  for (Magic& m : magics) {
+void serialize_magics(Magic magics[], std::ofstream out) {  
+  for (Square i = SQ_A1; i <= SQ_H8; i++) {
+    Magic m = magics[i];
+    
     out.write(reinterpret_cast<char*>(&m.mask), sizeof(m.mask));
     out.write(reinterpret_cast<char*>(&m.magic), sizeof(m.magic));
-
+    
     uint32_t attacks_len = sizeof(m.attacks) / sizeof(m.attacks[0]);
     out.write(reinterpret_cast<char*>(&attacks_len), sizeof(attacks_len));
     
@@ -72,8 +71,8 @@ void serialize_magics(Magic magics[], std::ofstream out) {
       out.write(reinterpret_cast<char*>(&attack), sizeof(attack));
     }
 
-    uint32_t shift_size = sizeof(m.shift)
-    out.write(reinterpret_cast<char*>(&shift_size), sizeof(shift_size));
+    std::cout << #BOOKMARK
+    
     out.write(reinterpret_cast<char*>(&m.shift), sizeof(m.shift));
   }
 }
